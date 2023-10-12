@@ -10,23 +10,35 @@ Create virtual environment.
 $ python3 -m venv .venv
 ```
 
-Activate virtual environment.
-
 ```
 $ . .venv/bin/activate
 ```
 
-Install pipenv package manager
-
-```
-pip install pipenv
-```
-
 Install dependencies.
 
+#### first time?
+
 ```
-$ pipenv install flask opencv-python numpy tensorflow flask-restful flask-cors gunicorn
+$ pip install flask opencv-python numpy tensorflow flask-restful flask-cors gunicorn
 ```
+
+Short cut
+
+```
+$ python3 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow flask-restful flask-cors gunicorn
+```
+Create requirements file
+```
+pip freeze > requirements.txt
+```
+
+#### subsequent time?
+
+```
+$ pip install
+```
+
+### Dev Run
 
 Export flask directory.
 
@@ -34,7 +46,7 @@ Export flask directory.
 $ export FLASK_APP=app.py
 ```
 
-### Dev Run
+Run app
 
 ```
 $ flask run
@@ -43,7 +55,7 @@ $ flask run
 ### Production Run
 
 ```
-$ gunicorn --workers=4 --bind 0.0.0.0:5000 app:app
+$ gunicorn --workers=4 --bind 0.0.0.0 app:app
 ```
 
 _Some sample images are available in `/sample_images` to upload and test the app._
