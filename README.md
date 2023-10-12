@@ -35,7 +35,7 @@ pip freeze > requirements.txt
 #### subsequent time?
 
 ```
-$ pip install
+$ pip install -r requirements.txt
 ```
 
 ### Dev Run
