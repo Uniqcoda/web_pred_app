@@ -19,13 +19,13 @@ Install dependencies.
 #### first time?
 
 ```
-$ pip install flask opencv-python numpy tensorflow flask-restful flask-cors gunicorn
+$ pip install flask opencv-python numpy tensorflow gunicorn
 ```
 
 Short cut
 
 ```
-$ python3 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow flask-restful flask-cors gunicorn
+$ python3 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow gunicorn
 ```
 Create requirements file
 ```
