@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h1>Skin Cancer Classification</h1>
+      <h2>Result</h2>
+      {% if prediction %}
+      <div class="result">
+        <h3>Prediction: {{ prediction.predicted_class }}</h3>
+        <p>{{ prediction.message }}</p>
+        <p>Shape Asymmetry: {{ prediction.shape_asymmetry }}</p>
+        <p>Border Irregularity: {{ prediction.border_irregularity }}</p>
+        <p>Colour Asymmetry: {{ prediction.colour_asymmetry }}</p>
+      </div>
+      <p>
+        The image below is a cleaned copy of the uploaded image, with the lesion
+        segmented by a blue line.
+      </p>
+      <img src="{{ image_path }}" alt="Uploaded Image" />
+      {% else %}
+      <p>{{error}}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

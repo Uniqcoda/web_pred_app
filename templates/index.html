@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skin Cancer Classification</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h1>Skin Cancer Classification</h1>
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="image">Upload an image of a skin lesion:</label>
+        <input
+          id="image"
+          type="file"
+          name="image"
+          accept="image/*"
+          capture="camera"
+          required
+        />
+        <small>Image should be in .jpg or .png format</small>
+        <input type="submit" value="Upload and Predict" />
+      </form>
+    </div>
+  </body>
+</html>
