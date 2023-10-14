@@ -7,7 +7,7 @@ This is a Python Flask app for skin cancer prediction.
 Create virtual environment.
 
 ```
-$ python3 -m venv .venv
+$ python3.8 -m venv .venv
 ```
 
 ```
@@ -25,7 +25,7 @@ $ pip install flask opencv-python numpy tensorflow gunicorn
 Short cut
 
 ```
-$ python3 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow gunicorn
+$ python3.8 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow gunicorn
 ```
 Create requirements file
 ```
