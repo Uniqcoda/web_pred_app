@@ -1,19 +1,14 @@
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras.models import load_model
 from helpers import preprocess
 import traceback
 import cv2
 
 INPUT_SHAPE = (224,224,3)
 
-# Load TFLite model
-interpreter = tf.lite.Interpreter(model_path="model_clss_vgg.tflite")
-interpreter.allocate_tensors()
-
-# Get input and output details
-input_index = interpreter.get_input_details()[0]["index"]
-output_index = interpreter.get_output_details()[0]["index"]
+loaded_model = load_model('classifier_netb3.h5')
 
 def predict(image, filename):
     try:
@@ -31,10 +26,7 @@ def predict(image, filename):
         img_array = tf.expand_dims(img_array, 0)
 
         # Run inference
-        interpreter.set_tensor(input_index, img_array)
-        interpreter.invoke()
-        predictions = interpreter.get_tensor(output_index)
-        asym_index = (features['horizontal_dissymmetry'] + features['vertical_dissymmetry']) / 2
+        predictions = loaded_model.predict(img_array)
 
         # Make predictions 
         probability = predictions[0][0]
@@ -42,6 +34,7 @@ def predict(image, filename):
 
         border_irregularity = 'high' if features['border_irregularity'] < 0.25 else 'low'
 
+        asym_index = (features['horizontal_dissymmetry'] + features['vertical_dissymmetry']) / 2
         shape_asymmetry = 'low' if asym_index > 0.25 else 'high'
 
         colour_asymmetry = 'high' if features['color_features']['color_asymmetry'] > 80 else 'low'
