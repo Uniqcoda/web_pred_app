@@ -46,8 +46,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 USER appuser
 
 # Expose the port that the application listens on.
-EXPOSE 8080
+EXPOSE 8000
 
 # Run the application.
-# CMD gunicorn '.venv.lib.python3.9.site-packages.gunicorn.http.wsgi' --bind=0.0.0.0:8080
-CMD gunicorn --workers=4 --bind 0.0.0.0:8080
+# CMD gunicorn '.venv.lib.python3.9.site-packages.gunicorn.http.wsgi' --bind=0.0.0.0:8000
+CMD gunicorn --workers=4 --bind 0.0.0.0 app:app
