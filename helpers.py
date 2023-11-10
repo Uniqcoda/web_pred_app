@@ -3,7 +3,6 @@ import numpy as np
 import math
 
 # Constants
-INPUT_SHAPE = (224,224,3)
 ASYMMETRY_THRESHOLD = 8  # Minimum contour area for asymmetry calculation
 STRUCTURING_ELEMENT_SIZE = 6 # For hair detection
 MIN_CONTOUR_AREA = 700 # More than this will not be able to detect very small lesions
@@ -306,11 +305,8 @@ def get_color_features(lesion_region):
         return {}
 
 def preprocess(image):
-    # 1. Resize image
-    resized_image = cv2.resize(image, INPUT_SHAPE[:2])
-
-    # 2. Clean image
-    cleaned_image = remove_hair(resized_image)
+    # 1. Clean image
+    cleaned_image = remove_hair(image)
 
     # 3. Get contoured lesion
     masks = get_mask(cleaned_image)

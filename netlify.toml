@@ -1,3 +1,0 @@
-[build]
-  command = "pip install flask opencv-python numpy===1.23.5 gunicorn tensorflow && gunicorn --workers=4 --bind 0.0.0.0 app:app"
-  environment = { PYTHON_VERSION = "3.8" }

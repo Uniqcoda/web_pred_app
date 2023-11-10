@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import traceback
 from prediction import predict
 import cv2
+import numpy as np
 
 app = Flask(__name__)
 
@@ -15,12 +16,11 @@ def get_prediction():
     try:
         # Get uploaded image
         file = request.files['image']
-        file_path = "./static/images/" + file.filename
-        file.save(file_path)
-        # Read the image           
-        img = cv2.imread(file_path)
 
-        result = predict(img)
+        # Read image as OpenCV image
+        img = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+
+        result = predict(img, file.filename)
 
         lesion_path = './static/images/lesion_' + file.filename
         cv2.imwrite(lesion_path, result['contoured_lesion'])
@@ -31,11 +31,11 @@ def get_prediction():
         print(e)
         traceback.print_exc()
 
-        return render_template('predict.html', error = 'Error making prediction for image. Please try again')
+        return render_template('predict.html', error = 'Lesion has not been detected on the image. Please try again')
 
 
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True)
+    # app.run(debug=False, host='0.0.0.0')
 

@@ -3,6 +3,9 @@ import tensorflow as tf
 from tensorflow import keras
 from helpers import preprocess
 import traceback
+import cv2
+
+INPUT_SHAPE = (224,224,3)
 
 # Load TFLite model
 interpreter = tf.lite.Interpreter(model_path="model_clss_vgg.tflite")
@@ -12,10 +15,17 @@ interpreter.allocate_tensors()
 input_index = interpreter.get_input_details()[0]["index"]
 output_index = interpreter.get_output_details()[0]["index"]
 
-def predict(image):
+def predict(image, filename):
     try:
+        # 1. Resize image
+        resized_image = cv2.resize(image, INPUT_SHAPE[:2])
+
+        # save resized image
+        file_path = "./static/images/" + filename
+        cv2.imwrite(file_path, resized_image)
+
         # Preprocess image
-        features = preprocess(image)
+        features = preprocess(resized_image)
 
         img_array = keras.preprocessing.image.img_to_array(features['cleaned_image'])
         img_array = tf.expand_dims(img_array, 0)
@@ -53,4 +63,4 @@ def predict(image):
     except Exception as e:
         print(e)
         traceback.print_exc()
-        return 'Error making prediction for image. Please try again'
+        return 'Lesion has not been detected on the image. Please try again'

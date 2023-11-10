@@ -2,16 +2,16 @@
 
 This is a Python Flask app for skin cancer prediction.
 
-### Set up
+## Set up
 
-Create virtual environment.
-
-```
-$ python3.8 -m venv .venv
-```
+#### Create virtual environment.
 
 ```
-$ . .venv/bin/activate
+python3 -m venv .venv
+```
+
+```
+source .venv/bin/activate
 ```
 
 Install dependencies.
@@ -19,13 +19,13 @@ Install dependencies.
 #### first time?
 
 ```
-$ pip install flask opencv-python numpy tensorflow gunicorn
+pip install flask opencv-python numpy tensorflow gunicorn
 ```
 
 Short cut
 
 ```
-$ python3.8 -m venv .venv; . .venv/bin/activate; pip install flask opencv-python numpy tensorflow gunicorn
+python3 -m venv .venv; source .venv/bin/activate; pip install flask opencv-python numpy tensorflow gunicorn
 ```
 Create requirements file
 ```
@@ -35,27 +35,24 @@ pip freeze > requirements.txt
 #### subsequent time?
 
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-### Dev Run
-
-Export flask directory.
-
+## Dev Run
 ```
-$ export FLASK_APP=app.py
+flask run
 ```
 
-Run app
+## Production Run
 
 ```
-$ flask run
-```
-
-### Production Run
-
-```
-$ gunicorn --workers=4 --bind 0.0.0.0 app:app
+gunicorn --workers=4 --bind 0.0.0.0 app:app
 ```
 
 _Some sample images are available in `/sample_images` to upload and test the app._
+
+## Run with Docker
+
+```
+docker compose up --build
+```
