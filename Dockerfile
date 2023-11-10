@@ -50,4 +50,4 @@ EXPOSE 8080
 
 # Run the application.
 # CMD gunicorn '.venv.lib.python3.9.site-packages.gunicorn.http.wsgi' --bind=0.0.0.0:8080
-CMD gunicorn --workers=4 --bind 0.0.0.0 app:app
+CMD gunicorn --workers=4 --bind 0.0.0.0:8080
