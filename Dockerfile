@@ -38,9 +38,7 @@ RUN apt update; apt install -y libgl1
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 # Switch to the non-privileged user to run the application.
@@ -51,4 +49,4 @@ EXPOSE 8000
 
 # Run the application.
 # CMD gunicorn '.venv.lib.python3.9.site-packages.gunicorn.http.wsgi' --bind=0.0.0.0:8000
-CMD gunicorn --bind 0.0.0.0:8000 app:app
+CMD gunicorn --workers=4 --bind 0.0.0.0 app:app
